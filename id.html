@@ -13,10 +13,10 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #f8fafc; /* Slate 50 */
-            overflow: hidden; /* Mencegah scroll saat loading */
+            overflow: hidden;
         }
 
-        /* Animasi Kustom */
+        /* --- ANIMATIONS --- */
         .fade-in-up {
             animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             opacity: 0;
@@ -28,17 +28,11 @@
         .delay-300 { animation-delay: 0.3s; }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Animasi Progress Bar */
+        /* Progress Bar Animation */
         .progress-line {
             width: 0%;
             animation: progressGrow 2.5s ease-in-out forwards;
@@ -50,7 +44,18 @@
             100% { width: 100%; }
         }
 
-        /* Watermark Background Pattern (Optional) */
+        /* Notification Popup Animation */
+        .pop-toast {
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+        }
+
+        @keyframes popIn {
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Background Pattern */
         .bg-pattern {
             background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
             background-size: 24px 24px;
@@ -61,7 +66,6 @@
 <body class="h-screen w-full flex flex-col items-center justify-center relative">
 
     <div class="absolute inset-0 bg-pattern z-0 pointer-events-none"></div>
-    
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-rose-200 rounded-full blur-[100px] opacity-30 z-0"></div>
 
     <div class="z-10 text-center px-6">
@@ -93,16 +97,26 @@
         </div>
 
         <div class="mt-10 w-48 md:w-64 mx-auto fade-in-up delay-200">
-            <div class="flex justify-between text-[10px] font-bold text-slate-400 mb-2 uppercase tracking-widest">
+            <div class="flex justify-between text-[10px] font-bold text-slate-400 mb-2 uppercase tracking-widest" id="progressText">
                 <span>Memuat Data</span>
-                <span>100%</span>
+                <span id="pctText">0%</span>
             </div>
             
             <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
-                <div class="h-full bg-gradient-to-r from-rose-500 to-rose-700 rounded-full progress-line shadow-lg shadow-rose-200"></div>
+                <div class="h-full bg-gradient-to-r from-rose-500 to-rose-700 rounded-full progress-line shadow-lg shadow-rose-200" id="progBar"></div>
             </div>
         </div>
 
+    </div>
+
+    <div id="statusPopup" class="hidden absolute bottom-20 z-20">
+        <div class="pop-toast bg-slate-800 text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-3">
+            <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span class="text-xs font-bold tracking-wide">Mohon tunggu, agenda sedang dimuat...</span>
+        </div>
     </div>
 
     <div class="absolute bottom-8 text-center w-full z-10 fade-in-up delay-300">
@@ -113,22 +127,37 @@
 
     <script>
         // --- KONFIGURASI URL ---
-        // Masukkan URL tujuan Anda di antara tanda kutip di bawah ini
+        // Link Web App Script OJK Anda
         const TARGET_URL = "https://script.google.com/macros/s/AKfycbyaO5ca9O5Dv-Swxh02lZXDnTKelaHTyf3F0sxjYqoWkn-yIiua_9DXL851bSV0hj4V3Q/exec"; 
         
         // --- LOGIC ---
         window.addEventListener('load', () => {
-            // Waktu tunggu animasi (2500ms = 2.5 detik)
-            // Sesuaikan dengan durasi animasi CSS 'progressGrow'
+            const pctText = document.getElementById('pctText');
+            
+            // 1. Simulasi Counter Persentase agar terlihat hidup
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 5;
+                if (progress > 100) progress = 100;
+                pctText.innerText = Math.floor(progress) + "%";
+                if (progress === 100) clearInterval(interval);
+            }, 100);
+
+            // 2. Logic Redirect setelah Animasi Bar Selesai (2.5 detik)
             setTimeout(() => {
-                if(TARGET_URL && TARGET_URL !== "https://script.google.com/macros/s/AKfycbyaO5ca9O5Dv-Swxh02lZXDnTKelaHTyf3F0sxjYqoWkn-yIiua_9DXL851bSV0hj4V3Q/exec") {
+                // Tampilkan Popup Notifikasi
+                const popup = document.getElementById('statusPopup');
+                popup.classList.remove('hidden'); // Munculkan popup
+                
+                // Ubah status teks di atas bar (opsional, untuk estetika)
+                document.getElementById('progressText').innerHTML = '<span class="text-rose-600">Selesai</span><span>100%</span>';
+
+                // 3. Jeda sedikit (1 detik) agar user sempat membaca popup, lalu redirect
+                setTimeout(() => {
                     window.location.href = TARGET_URL;
-                } else {
-                    console.warn("URL Tujuan belum diatur di dalam script!");
-                    // Hapus baris alert ini jika sudah production
-                    alert("Splash Screen Selesai. Mohon masukkan URL tujuan di kodingan.");
-                }
-            }, 2500); 
+                }, 1000); 
+
+            }, 2500); // 2500ms sesuai durasi animasi CSS .progress-line
         });
     </script>
 </body>

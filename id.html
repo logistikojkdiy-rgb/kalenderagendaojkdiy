@@ -114,14 +114,14 @@
     <script>
         // --- KONFIGURASI URL ---
         // Masukkan URL tujuan Anda di antara tanda kutip di bawah ini
-        const TARGET_URL = "URL_WEB_APP_ATAU_SPREADSHEET_ANDA_DISINI"; 
+        const TARGET_URL = "https://script.google.com/macros/s/AKfycbyaO5ca9O5Dv-Swxh02lZXDnTKelaHTyf3F0sxjYqoWkn-yIiua_9DXL851bSV0hj4V3Q/exec"; 
         
         // --- LOGIC ---
         window.addEventListener('load', () => {
             // Waktu tunggu animasi (2500ms = 2.5 detik)
             // Sesuaikan dengan durasi animasi CSS 'progressGrow'
             setTimeout(() => {
-                if(TARGET_URL && TARGET_URL !== "URL_WEB_APP_ATAU_SPREADSHEET_ANDA_DISINI") {
+                if(TARGET_URL && TARGET_URL !== "https://script.google.com/macros/s/AKfycbyaO5ca9O5Dv-Swxh02lZXDnTKelaHTyf3F0sxjYqoWkn-yIiua_9DXL851bSV0hj4V3Q/exec") {
                     window.location.href = TARGET_URL;
                 } else {
                     console.warn("URL Tujuan belum diatur di dalam script!");

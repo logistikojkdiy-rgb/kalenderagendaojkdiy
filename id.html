@@ -11,12 +11,12 @@
     <link rel="icon" type="image/png" sizes="32x32" href="https://ik.imagekit.io/logojkdiy/Synergy%20Logo%20(1).png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://ik.imagekit.io/logojkdiy/Synergy%20Logo%20(1).png">
     <link rel="apple-touch-icon" sizes="180x180" href="https://ik.imagekit.io/logojkdiy/Synergy%20Logo%20(1).png">
-    <meta name="theme-color" content="#f8fafc">
+    <meta name="theme-color" content="#ffffff">
     
-    <!-- Preload Fonts: Plus Jakarta Sans for Crisp Enterprise Look -->
+    <!-- Preload Fonts: Plus Jakarta Sans for Pristine Enterprise Look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS Engine -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -33,7 +33,7 @@
                     },
                     keyframes: {
                         slideUpFade: { 
-                            '0%': { opacity: '0', transform: 'translateY(20px)' }, 
+                            '0%': { opacity: '0', transform: 'translateY(30px)' }, 
                             '100%': { opacity: '1', transform: 'translateY(0)' } 
                         }
                     }
@@ -42,22 +42,22 @@
         }
     </script>
 
-    <!-- Custom CSS untuk Clean Transitions -->
+    <!-- Custom CSS untuk Clean Architecture Transitions -->
     <style>
         body { margin: 0; overflow: hidden; background-color: #f8fafc; }
 
-        /* Iframe Target State (Clean Fade In) */
+        /* Iframe Target State (Clean Sharp Reveal) */
         #app-container {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(20px) scale(0.98);
             transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
         #app-container.app-active { 
             opacity: 1; 
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
 
-        /* Master Splash Canvas Transition (Curtain Slide Up) */
+        /* Master Splash Canvas Transition (Smooth Elevation Drop) */
         #splash-wrapper {
             transition: transform 1.2s cubic-bezier(0.65, 0, 0.05, 1), opacity 0.8s ease;
             transform-origin: top center;
@@ -65,11 +65,22 @@
         }
         #splash-wrapper.slide-out {
             transform: translateY(-100%);
-            opacity: 0.8;
+            opacity: 0.5;
             pointer-events: none;
         }
 
-        /* Clean Scrollbar untuk panel kanan jika diperlukan */
+        /* Subtle Inner Shadow for Video Cards (Premium touch) */
+        .video-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Menyembunyikan Scrollbar */
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
@@ -88,110 +99,136 @@
     </div>
 
     <!-- ==========================================
-         LAYER 2: SWISS MINIMALIST SPLASH SCREEN
+         LAYER 2: PRISTINE BENTO SPLASH SCREEN
          ========================================== -->
-    <div id="splash-wrapper" class="fixed inset-0 z-50 flex flex-col lg:flex-row w-full h-full bg-white shadow-2xl">
+    <div id="splash-wrapper" class="fixed inset-0 z-50 flex items-center justify-center w-full h-full p-0 lg:p-10 overflow-hidden bg-slate-50">
         
-        <!-- ==========================================
-             SISI KIRI: TIPOGRAFI & PROGRESS (Ruang Putih Masif)
-             ========================================== -->
-        <div class="w-full lg:w-1/2 h-[45%] lg:h-full flex flex-col justify-between px-8 py-10 lg:px-24 lg:py-20 bg-white z-20">
-            
-            <!-- Top: Header Branding -->
-            <div class="animate-slide-up-fade" style="animation-delay: 0.1s;">
-                <div class="w-12 h-12 lg:w-16 lg:h-16 bg-red-50 rounded-2xl flex items-center justify-center mb-6 lg:mb-8 border border-red-100">
-                    <svg class="w-6 h-6 lg:w-8 lg:h-8 text-ojk-red" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                    </svg>
-                </div>
-                <h2 class="text-xs lg:text-sm font-bold tracking-[0.2em] text-slate-400 uppercase mb-3">Software Internal</h2>
-                <h1 class="text-3xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.1] mb-4">
-                    Kalender Agenda<br>
-                    <span class="text-slate-400">Kantor OJK DIY.</span>
-                </h1>
-                <p class="text-slate-500 font-normal text-sm lg:text-base leading-relaxed max-w-sm">
-                    Akses terenkripsi. Memperbarui database kegiatan.
-                </p>
-            </div>
-
-            <!-- Bottom: Linear Precision Progress -->
-            <div class="w-full max-w-md mt-auto animate-slide-up-fade" style="animation-delay: 0.3s;">
-                
-                <!-- Huge Numeric Counter -->
-                <div class="flex items-baseline mb-4">
-                    <span id="progress-percent" class="text-6xl lg:text-8xl font-light tracking-tighter text-slate-900">0</span>
-                    <span class="text-2xl lg:text-3xl text-slate-400 font-light ml-2">%</span>
-                </div>
-
-                <!-- Clean Hairline Progress Track -->
-                <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden relative">
-                    <div id="progress-fill" class="absolute left-0 top-0 bottom-0 w-0 bg-ojk-red rounded-full transition-all duration-100 ease-out"></div>
-                </div>
-
-                <!-- Subtle Execution Logs -->
-                <div class="mt-5 flex flex-col gap-1.5">
-                    <span id="log-text" class="text-xs lg:text-sm font-semibold text-slate-800 tracking-wide transition-opacity duration-300">
-                        Inisiasi ruang kerja...
-                    </span>
-                    <span id="sub-log" class="text-[10px] text-slate-400 font-mono tracking-widest uppercase transition-opacity duration-300">
-                        Memverifikasi Sertifikat Keamanan
-                    </span>
-                </div>
-            </div>
-
-            <!-- Footer Watermark -->
-            <div class="absolute bottom-6 left-8 lg:left-24 text-[10px] font-bold text-slate-300 tracking-widest uppercase">
-                Software as a Services &bull; LMSt
-            </div>
-
+        <!-- AMBIENT LIGHTING: Clean High-Key Blurred Background -->
+        <!-- Memanfaatkan video Biru Abu Putih sebagai soft gradient generator -->
+        <div class="absolute inset-0 z-0 w-full h-full pointer-events-none">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover scale-110 blur-[80px] opacity-40 mix-blend-multiply">
+                <source src="https://ik.imagekit.io/logojkdiy/Background%20Biru%20Abu%20Putih.mp4?updatedAt=1775700470199" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-white/60"></div>
         </div>
 
         <!-- ==========================================
-             SISI KANAN: CLEAN MEDIA GRID (Background Abu Terang)
+             THE CLEAN MONOLITH (White Container)
              ========================================== -->
-        <div class="relative w-full lg:w-1/2 h-[55%] lg:h-full bg-slate-50 border-l border-slate-100 flex flex-col justify-center p-6 lg:p-16 overflow-hidden">
+        <div class="relative z-10 w-full h-full lg:max-w-[1440px] lg:max-h-[850px] bg-white lg:rounded-[3rem] shadow-[0_20px_80px_-10px_rgba(0,0,0,0.08)] ring-1 ring-slate-900/5 flex flex-col lg:flex-row overflow-hidden animate-slide-up-fade">
             
-            <!-- Elemen Dekoratif Sangat Halus -->
-            <div class="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-white via-transparent to-transparent opacity-60"></div>
-
-            <div class="relative z-10 w-full max-w-xl mx-auto flex flex-col gap-4 lg:gap-6">
+            <!-- ==========================================
+                 SISI KIRI: SWISS TYPOGRAPHY & HUD
+                 ========================================== -->
+            <div class="w-full lg:w-[45%] h-[40%] lg:h-full flex flex-col justify-between px-8 py-10 lg:px-24 lg:py-20 bg-white z-20">
                 
-                <!-- Video 1: Layanan Terintegrasi (Crisp Card) -->
-                <div class="relative w-full aspect-video lg:aspect-auto lg:h-[320px] bg-white rounded-[1.5rem] lg:rounded-[2rem] overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-slate-900/5 group">
-                    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover transition-transform duration-[3s] ease-out group-hover:scale-105">
-                        <source src="https://ik.imagekit.io/logojkdiy/Layanan%20Terintegrasi%20-%2006032026%20(3).mp4?updatedAt=1772759127067" type="video/mp4">
-                    </video>
+                <!-- Top: Header Branding -->
+                <div>
+                    <!-- Elegant Minimalist Symbol -->
+                    <div class="w-12 h-12 lg:w-16 lg:h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-6 lg:mb-8 border border-slate-100 shadow-sm">
+                        <svg class="w-6 h-6 lg:w-8 lg:h-8 text-ojk-red" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-[10px] lg:text-xs font-bold tracking-[0.2em] text-slate-400 uppercase mb-3"></h2>
+                    <h1 class="text-4xl lg:text-6xl font-bold tracking-tight text-slate-900 leading-[1.05] mb-4">
+                        Agenda<br>
+                        <span class="text-slate-400 font-medium">Kegiatan.</span>
+                    </h1>
+                    <p class="text-slate-500 font-normal text-sm lg:text-base leading-relaxed max-w-sm">
+                        Workspace OJK DIY. Sedang memuat data kalender....
+                    </p>
+                </div>
+
+                <!-- Bottom: Precision Progress -->
+                <div class="w-full max-w-md mt-auto">
+                    <!-- Numeric Counter -->
+                    <div class="flex items-baseline mb-3 lg:mb-4">
+                        <span id="progress-percent" class="text-6xl lg:text-8xl font-light tracking-tighter text-slate-900">0</span>
+                        <span class="text-2xl lg:text-3xl text-slate-300 font-light ml-2">%</span>
+                    </div>
+
+                    <!-- Clean Hairline Progress Track -->
+                    <div class="w-full h-1 bg-slate-100 rounded-full overflow-hidden relative">
+                        <div id="progress-fill" class="absolute left-0 top-0 bottom-0 w-0 bg-ojk-red rounded-full transition-all duration-100 ease-out"></div>
+                    </div>
+
+                    <!-- Execution Logs -->
+                    <div class="mt-4 lg:mt-6 flex flex-col gap-1.5">
+                        <span id="log-text" class="text-xs lg:text-sm font-semibold text-slate-800 tracking-wide transition-opacity duration-300">
+                            Menyiapkan ruang kerja...
+                        </span>
+                        <span id="sub-log" class="text-[9px] lg:text-[10px] text-slate-400 font-mono tracking-widest uppercase transition-opacity duration-300 flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            Sinkronisasi Node Sistem Aktif
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ==========================================
+                 SISI KANAN: ASYMMETRIC BENTO GRID (Landscape Preserved)
+                 ========================================== -->
+            <!-- Background panel kanan abu sangat halus untuk diferensiasi visual -->
+            <div class="w-full lg:w-[55%] h-[60%] lg:h-full bg-slate-50 border-l border-slate-100 flex flex-col justify-center p-4 lg:p-12 relative overflow-hidden">
+                
+                <!-- Bento Grid Structure -->
+                <!-- Menggunakan CSS Grid untuk mengatur proporsi video. Baris pertama (Hero) sedikit lebih tinggi dari baris kedua. -->
+                <div class="w-full h-full lg:h-[90%] grid grid-cols-2 grid-rows-[1.4fr_1fr] gap-3 lg:gap-6 relative z-10">
                     
-                    <!-- Clean Pill Tag (Apple iOS Style) -->
-                    <div class="absolute top-4 left-4 lg:top-6 lg:left-6 px-4 py-2 bg-white/90 backdrop-blur-md rounded-full shadow-sm border border-white/50 flex items-center gap-2">
-                        <div class="w-1.5 h-1.5 rounded-full bg-ojk-red animate-pulse"></div>
-                        <span class="text-[10px] lg:text-xs font-bold text-slate-900 tracking-wider">Layanan Terintegrasi</span>
+                    <!-- BENTO ITEM 1 (HERO): Arsip OJK DIY -->
+                    <div class="col-span-2 relative rounded-[1.5rem] lg:rounded-[2.5rem] overflow-hidden video-card bg-white shadow-[0_10px_30px_rgba(0,0,0,0.04)] group">
+                        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover transition-transform duration-[4s] ease-out group-hover:scale-105">
+                            <source src="https://ik.imagekit.io/idnarsipojkdiy/Arsip-OJKDIY.mp4?updatedAt=1764585611502" type="video/mp4">
+                        </video>
+                        <!-- Crisp Apple-style Pill Badge -->
+                        <div class="absolute top-4 left-4 lg:top-6 lg:left-6 px-3 py-1.5 lg:px-4 lg:py-2 bg-white/90 backdrop-blur-md rounded-full shadow-sm flex items-center gap-2 transition-transform duration-300 group-hover:scale-105">
+                            <div class="w-1.5 h-1.5 rounded-full bg-ojk-red"></div>
+                            <span class="text-[9px] lg:text-[11px] font-bold text-slate-800 tracking-wider">Dokumentasi</span>
+                        </div>
                     </div>
+
+                    <!-- BENTO ITEM 2: Jogja Istimewa -->
+                    <div class="col-span-1 relative rounded-[1.2rem] lg:rounded-[2rem] overflow-hidden video-card bg-white shadow-[0_10px_30px_rgba(0,0,0,0.04)] group">
+                        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover transition-transform duration-[4s] ease-out group-hover:scale-105">
+                            <source src="https://ik.imagekit.io/logojkdiy/JOGJA%20ISTIMEWA.mp4?updatedAt=1763092078008" type="video/mp4">
+                        </video>
+                        <!-- Crisp Pill Badge -->
+                        <div class="absolute top-3 left-3 lg:top-5 lg:left-5 px-2.5 py-1.5 lg:px-4 lg:py-2 bg-white/90 backdrop-blur-md rounded-full shadow-sm flex items-center gap-2 transition-transform duration-300 group-hover:scale-105">
+                            <div class="w-1.5 h-1.5 rounded-full bg-slate-400"></div>
+                            <span class="text-[8px] lg:text-[10px] font-bold text-slate-800 tracking-wider">Tugu Jogja</span>
+                        </div>
+                    </div>
+
+                    <!-- BENTO ITEM 3: Layanan Terintegrasi -->
+                    <div class="col-span-1 relative rounded-[1.2rem] lg:rounded-[2rem] overflow-hidden video-card bg-white shadow-[0_10px_30px_rgba(0,0,0,0.04)] group">
+                        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover transition-transform duration-[4s] ease-out group-hover:scale-105">
+                            <source src="https://ik.imagekit.io/logojkdiy/Layanan%20Terintegrasi%20-%2006032026%20(3).mp4?updatedAt=1772759127067" type="video/mp4">
+                        </video>
+                        <!-- Crisp Pill Badge -->
+                        <div class="absolute top-3 left-3 lg:top-5 lg:left-5 px-2.5 py-1.5 lg:px-4 lg:py-2 bg-white/90 backdrop-blur-md rounded-full shadow-sm flex items-center gap-2 transition-transform duration-300 group-hover:scale-105">
+                            <div class="w-1.5 h-1.5 rounded-full bg-slate-400"></div>
+                            <span class="text-[8px] lg:text-[10px] font-bold text-slate-800 tracking-wider">SaaS</span>
+                        </div>
+                    </div>
+
                 </div>
 
-                <!-- Video 2: Jogja Istimewa (Crisp Card) -->
-                <div class="relative w-full aspect-video lg:aspect-auto lg:h-[320px] bg-white rounded-[1.5rem] lg:rounded-[2rem] overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-slate-900/5 group">
-                    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover transition-transform duration-[3s] ease-out group-hover:scale-105">
-                        <source src="https://ik.imagekit.io/logojkdiy/JOGJA%20ISTIMEWA.mp4?updatedAt=1763092078008" type="video/mp4">
-                    </video>
-
-                    <!-- Clean Pill Tag -->
-                    <div class="absolute top-4 left-4 lg:top-6 lg:left-6 px-4 py-2 bg-white/90 backdrop-blur-md rounded-full shadow-sm border border-white/50 flex items-center gap-2">
-                        <div class="w-1.5 h-1.5 rounded-full bg-slate-900"></div>
-                        <span class="text-[10px] lg:text-xs font-bold text-slate-900 tracking-wider">Jogja Istimewa</span>
-                    </div>
+                <!-- Footer Watermark di sisi kanan untuk balance layout -->
+                <div class="absolute bottom-4 right-6 lg:bottom-8 lg:right-12 text-[9px] lg:text-[10px] font-bold text-slate-300 tracking-widest uppercase">
+                    Software as a Service &bull; LMSt
                 </div>
-
             </div>
-        </div>
 
+        </div>
     </div>
 
     <!-- Script Logika Frontend -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const LOADING_DURATION = 10000; // 10 Detik
-            const UPDATE_INTERVAL = 30; // ~33fps untuk kelancaran optimal
+            const UPDATE_INTERVAL = 30; // ~33fps
             const TOTAL_STEPS = LOADING_DURATION / UPDATE_INTERVAL;
             
             const progressFill = document.getElementById('progress-fill');
@@ -204,11 +241,11 @@
             
             // Clean System Logs Array
             const logs = [
-                { msg: "Inisiasi ruang kerja...", sub: "Memverifikasi Sertifikat Keamanan" },
-                { msg: "Sinkronisasi kalender pimpinan...", sub: "Mengunduh Data Terenkripsi" },
-                { msg: "Membangun arsitektur visual...", sub: "Rendering Komponen DOM" },
-                { msg: "Menghubungkan layanan GAS...", sub: "Koneksi ke google.script.run" },
-                { msg: "Menerapkan lapisan akses...", sub: "Validasi Otorisasi Pengguna" },
+                { msg: "Menyiapkan ruang kerja...", sub: "Memverifikasi Sertifikat Keamanan" },
+                { msg: "Memuat modul kearsipan...", sub: "Mengunduh Database OJK DIY" },
+                { msg: "Sinkronisasi kalender...", sub: "Mendekripsi Data Pimpinan" },
+                { msg: "Membangun arsitektur visual...", sub: "Rendering Komponen Antarmuka" },
+                { msg: "Menghubungkan layanan server...", sub: "Koneksi ke google.script.run" },
                 { msg: "Penyelesaian integrasi...", sub: "Finalisasi State Aplikasi" }
             ];
 
@@ -217,7 +254,7 @@
             const intervalId = setInterval(() => {
                 currentStep++;
                 
-                // Ease-out Quad: Cepat di awal, melambat sangat halus di akhir (Clean transition)
+                // Ease-out Quad: Smooth and clean progression
                 let ratio = currentStep / TOTAL_STEPS;
                 let eased = ratio * (2 - ratio);
                 let percent = Math.min(Math.floor(eased * 100), 100);
@@ -225,12 +262,12 @@
                 // Update UI Progress Bar
                 progressFill.style.width = `${percent}%`;
                 
-                // Update Numeric Counter
+                // Update Numeric Counter (Optimized)
                 if (progressPercent.innerText !== percent.toString()) {
                     progressPercent.innerText = percent;
                 }
 
-                // Update Logs Text (Rotasi yang bersih)
+                // Update Logs Text (Clean crossfade)
                 const logIndex = Math.min(Math.floor(ratio * logs.length), logs.length - 1);
                 if (logText.innerText !== logs[logIndex].msg) {
                     logText.style.opacity = '0';
@@ -238,7 +275,7 @@
                     
                     setTimeout(() => {
                         logText.innerText = logs[logIndex].msg;
-                        subLog.innerText = logs[logIndex].sub;
+                        subLog.childNodes[2].nodeValue = " " + logs[logIndex].sub; // Keep the blinking dot
                         logText.style.opacity = '1';
                         subLog.style.opacity = '1';
                     }, 150);
@@ -254,14 +291,15 @@
             function completeLoading() {
                 logText.innerText = "Akses terverifikasi.";
                 logText.classList.replace('text-slate-800', 'text-emerald-600');
-                subLog.innerText = "Membuka Agenda Ruang Kerja";
+                subLog.childNodes[2].nodeValue = " Membuka Workspace Agenda";
+                subLog.querySelector('span').classList.replace('bg-emerald-500', 'bg-emerald-600');
 
-                // Theatrical "Curtain Slide" Transition
+                // Theatrical "Clean Elevation Drop" Transition
                 setTimeout(() => {
-                    // 1. Geser layar putih ke atas secara presisi
+                    // 1. Splash Wrapper bergeser ke atas
                     splashWrapper.classList.add('slide-out');
                     
-                    // 2. Tampilkan Iframe secara halus (fade in & slide up slighty)
+                    // 2. Iframe menajam dan kembali ke ukuran normal
                     appContainer.classList.add('app-active');
                     appContainer.classList.remove('pointer-events-none');
                     document.body.style.overflow = 'auto'; // Kembalikan scroll
